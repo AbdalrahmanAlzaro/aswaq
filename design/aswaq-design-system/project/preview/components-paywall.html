@@ -1,0 +1,31 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_preview.css">
+<title>Components · paywall modal</title>
+<style>
+  .scrim { position: relative; padding: 24px; background: linear-gradient(to bottom, rgba(31,26,21,0.6) 0%, rgba(31,26,21,0.85) 100%); border-radius: 20px; min-height: 280px; overflow: hidden; }
+  .scrim::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle at 20% 20%, rgba(201, 150, 51, 0.18), transparent 40%), radial-gradient(circle at 80% 80%, rgba(191, 83, 47, 0.22), transparent 45%); }
+  .sheet { position: relative; background: var(--cream-50); border-radius: 28px; padding: 24px; max-width: 360px; margin: 24px auto 0; box-shadow: var(--shadow-xl); font-family: var(--font-body); text-align: center; }
+  .crest { width: 56px; height: 56px; border-radius: 999px; background: var(--charcoal-600); display: grid; place-items: center; margin: 0 auto 14px; box-shadow: 0 0 0 4px var(--gold-100), 0 0 0 5px var(--gold-300); }
+  .crest svg { fill: var(--gold-400); }
+  .ttl { font-family: var(--font-display); font-weight: 600; font-size: 24px; line-height: 1.2; letter-spacing: -0.01em; color: var(--fg-1); }
+  .sub { font-size: 14px; color: var(--fg-2); margin-top: 8px; line-height: 1.5; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: var(--gold-soft-bg); color: var(--gold-600); font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+  .cta { width: 100%; padding: 14px; border-radius: 14px; background: var(--gold-400); color: var(--charcoal-700); border: 0; font-size: 15px; font-weight: 700; margin-top: 16px; cursor: pointer; }
+  .alt { width: 100%; padding: 10px; background: transparent; border: 0; color: var(--fg-2); font-size: 13px; cursor: pointer; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="card tight" style="padding: 8px; background: var(--cream-200);">
+  <div class="scrim">
+    <div class="sheet">
+      <span class="pill">Premium</span>
+      <div style="height:14px;"></div>
+      <div class="crest"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M3 7 L7 11 L12 5 L17 11 L21 7 L19 18 H5 Z"/></svg></div>
+      <div class="ttl">Compare luxury items, side by side</div>
+      <div class="sub">Side-by-side comparison for watches and jewellery is included with Premium. 4 JD a month, cancel anytime.</div>
+      <button class="cta">Try Premium · 7 days free</button>
+      <button class="alt">Not now</button>
+    </div>
+  </div>
+</div>
+</body></html>

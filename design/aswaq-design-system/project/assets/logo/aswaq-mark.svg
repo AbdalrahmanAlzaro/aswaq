@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 96" fill="none" role="img" aria-label="Aswaq mark">
+  <defs>
+    <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#bf532f"></stop>
+      <stop offset="1" stop-color="#a64223"></stop>
+    </linearGradient>
+  </defs>
+  <g transform="translate(8 12)">
+    <path d="M0 72 L0 32 A32 32 0 0 1 64 32 L64 72 Z" fill="url(#g2)"></path>
+    <path d="M12 72 L12 32 A20 20 0 0 1 52 32 L52 72 Z" fill="#fdfbf6"></path>
+    <circle cx="32" cy="34" r="3.5" fill="#c99633"></circle>
+    <rect x="30.5" y="36" width="3" height="30" fill="#c99633"></rect>
+  </g>
+</svg>

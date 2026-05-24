@@ -1,0 +1,36 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_preview.css">
+<title>Components · empty & loading</title>
+<style>
+  body { background: var(--bg); }
+  .empty { background: var(--surface); border-radius: 20px; padding: 28px 24px; text-align: center; border: 1px dashed var(--cream-400); }
+  .crest { width: 56px; height: 56px; border-radius: 999px; background: var(--cream-200); display: grid; place-items: center; margin: 0 auto 12px; color: var(--fg-3); }
+  .ttl { font-family: var(--font-display); font-weight: 600; font-size: 20px; color: var(--fg-1); }
+  .sub { font-size: 13px; color: var(--fg-2); margin-top: 6px; }
+  .cta { margin-top: 14px; padding: 10px 18px; background: var(--accent); color: var(--accent-fg); border: 0; border-radius: 12px; font-weight: 600; font-size: 13px; cursor: pointer; font-family: var(--font-body); }
+  .skel { background: var(--surface); border-radius: 20px; padding: 14px; border: 1px solid var(--border); display: flex; gap: 14px; align-items: center; }
+  .skel .img { width: 96px; height: 64px; border-radius: 14px; background: var(--cream-200); animation: pulse 1.2s ease-in-out infinite; }
+  .skel .lines { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+  .skel .line { height: 12px; border-radius: 6px; background: var(--cream-200); animation: pulse 1.2s ease-in-out infinite; }
+  .skel .line.short { width: 60%; }
+  .skel .line.tiny { width: 35%; height: 10px; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.55; } }
+</style>
+</head>
+<body>
+<div class="card tight">
+  <div class="spread"><span class="eyebrow">Empty · skeleton · error</span><span class="mono">no-shimmer pulse 0.6→1.0 over 1.2s</span></div>
+  <div class="row" style="gap: 14px; align-items: stretch;">
+    <div class="empty" style="flex: 1;">
+      <div class="crest"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.5-9.5-9C.7 8.6 2.5 5 6 5c2 0 3.5 1 4 2.5C10.5 6 12 5 14 5c3.5 0 5.3 3.6 3.5 7-2.5 4.5-5.5 9-5.5 9z"/></svg></div>
+      <div class="ttl">Nothing saved yet</div>
+      <div class="sub">Tap the heart on anything worth coming back to.</div>
+      <button class="cta">Browse cafés</button>
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 8px;">
+      <div class="skel"><div class="img"></div><div class="lines"><div class="line"></div><div class="line short"></div><div class="line tiny"></div></div></div>
+      <div class="skel"><div class="img"></div><div class="lines"><div class="line"></div><div class="line short"></div><div class="line tiny"></div></div></div>
+    </div>
+  </div>
+</div>
+</body></html>

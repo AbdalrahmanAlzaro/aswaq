@@ -1,0 +1,208 @@
+@import "tailwindcss";
+
+/* =========================================================================
+   Aswaq Design System — Foundations (Tailwind v4 @theme)
+   ========================================================================= */
+
+@theme {
+  /* Color — Terracotta (primary) */
+  --color-terracotta-50: #fbf1ec;
+  --color-terracotta-100: #f5dccf;
+  --color-terracotta-200: #ecb9a1;
+  --color-terracotta-300: #df9072;
+  --color-terracotta-400: #d06b4b;
+  --color-terracotta-500: #bf532f;
+  --color-terracotta-600: #a64223;
+  --color-terracotta-700: #82331b;
+  --color-terracotta-800: #5e2614;
+  --color-terracotta-900: #3b170c;
+
+  /* Color — Cream (neutral warm) */
+  --color-cream-50: #fdfbf6;
+  --color-cream-100: #faf5ea;
+  --color-cream-200: #f3eada;
+  --color-cream-300: #e8dcc5;
+  --color-cream-400: #d2c0a1;
+  --color-cream-500: #b69e78;
+
+  /* Color — Gold (status) */
+  --color-gold-50: #faf3e1;
+  --color-gold-100: #f3e3b5;
+  --color-gold-200: #ebd086;
+  --color-gold-300: #dcb24f;
+  --color-gold-400: #c99633;
+  --color-gold-500: #ad7c22;
+  --color-gold-600: #8a611b;
+
+  /* Color — Charcoal (ink) */
+  --color-charcoal-50: #f4f1ec;
+  --color-charcoal-100: #d8d2c8;
+  --color-charcoal-200: #a8a097;
+  --color-charcoal-300: #756d63;
+  --color-charcoal-400: #4a4339;
+  --color-charcoal-500: #2b251f;
+  --color-charcoal-600: #1f1a15;
+  --color-charcoal-700: #14110d;
+
+  /* Color — Olive (success) */
+  --color-olive-100: #e6e7c8;
+  --color-olive-300: #a8ad62;
+  --color-olive-500: #6e7331;
+  --color-olive-700: #444723;
+
+  /* Color — Pomegranate (danger) */
+  --color-pom-100: #f7d8d3;
+  --color-pom-300: #d97268;
+  --color-pom-500: #b2342a;
+  --color-pom-700: #7a1f17;
+
+  /* Radii */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-2xl: 36px;
+
+  /* Shadows (charcoal-tinted, never grey) */
+  --shadow-xs: 0 1px 2px rgba(31, 26, 21, 0.06);
+  --shadow-sm: 0 2px 6px rgba(31, 26, 21, 0.06), 0 1px 2px rgba(31, 26, 21, 0.04);
+  --shadow-md: 0 8px 20px -8px rgba(31, 26, 21, 0.14), 0 2px 6px rgba(31, 26, 21, 0.05);
+  --shadow-lg: 0 18px 40px -16px rgba(31, 26, 21, 0.22), 0 4px 12px rgba(31, 26, 21, 0.06);
+  --shadow-xl: 0 32px 60px -20px rgba(31, 26, 21, 0.30), 0 8px 20px rgba(31, 26, 21, 0.08);
+
+  /* Easing & timing */
+  --ease-out-aswaq: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Semantic tokens + font-family wiring (next/font sets the CSS variables) */
+:root {
+  --bg: var(--color-cream-50);
+  --bg-raised: var(--color-cream-100);
+  --bg-sunken: var(--color-cream-200);
+  --surface: #ffffff;
+  --surface-alt: var(--color-cream-100);
+  --surface-tint: var(--color-terracotta-50);
+
+  --fg-1: var(--color-charcoal-600);
+  --fg-2: var(--color-charcoal-400);
+  --fg-3: var(--color-charcoal-300);
+  --fg-mute: var(--color-charcoal-200);
+  --fg-inverse: var(--color-cream-50);
+
+  --border: var(--color-cream-300);
+  --border-strong: var(--color-cream-400);
+  --border-focus: var(--color-terracotta-500);
+
+  --accent: var(--color-terracotta-500);
+  --accent-hover: var(--color-terracotta-600);
+  --accent-press: var(--color-terracotta-700);
+  --accent-fg: #ffffff;
+
+  --gold: var(--color-gold-400);
+  --gold-soft-bg: var(--color-gold-50);
+
+  --success: var(--color-olive-500);
+  --success-soft-bg: var(--color-olive-100);
+
+  --danger: var(--color-pom-500);
+  --danger-soft-bg: var(--color-pom-100);
+
+  --star: var(--color-gold-400);
+
+  /* Font stacks (next/font supplies --font-display, --font-body, etc.) */
+  --font-stack-display: var(--font-display), "Cormorant Garamond", "Times New Roman", serif;
+  --font-stack-body: var(--font-body), -apple-system, "Segoe UI", system-ui, sans-serif;
+  --font-stack-arabic: var(--font-arabic), "Tajawal", "Segoe UI Arabic", sans-serif;
+  --font-stack-arabic-display: var(--font-arabic-display), "Amiri", var(--font-arabic), sans-serif;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--fg-1);
+  font-family: var(--font-stack-body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+[lang="ar"],
+[dir="rtl"] {
+  font-family: var(--font-stack-arabic);
+}
+
+/* Tabular Latin digits, even inside Arabic — prices stay 0–9 */
+.num {
+  font-family: var(--font-stack-body);
+  font-feature-settings: "tnum", "lnum";
+}
+
+/* Price helper: Latin digits + currency, isolated bidi run so "12 JD"
+   never reorders to "JD 12" when embedded in Arabic text. */
+.price {
+  font-family: var(--font-stack-body);
+  font-feature-settings: "tnum", "lnum";
+  font-weight: 700;
+  unicode-bidi: isolate;
+  direction: ltr;
+  white-space: nowrap;
+}
+[dir="rtl"] .price {
+  unicode-bidi: isolate;
+}
+
+/* Display-headings — Latin + Arabic counterpart */
+.font-display {
+  font-family: var(--font-stack-display);
+}
+[lang="ar"] .font-display,
+[dir="rtl"] .font-display {
+  font-family: var(--font-stack-arabic-display);
+  letter-spacing: 0;
+}
+
+/* Directional icons: mirror under RTL */
+.flip-rtl {
+  transition: transform 0s;
+}
+[dir="rtl"] .flip-rtl {
+  transform: scaleX(-1);
+}
+
+/* Eyebrow — uppercase Latin / standard-case Arabic, +0.14em tracking */
+.eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+}
+[lang="ar"] .eyebrow,
+[dir="rtl"] .eyebrow {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* Star track for ratings */
+.stars-track {
+  position: relative;
+  display: inline-block;
+  color: var(--color-cream-300);
+}
+.stars-fill {
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0;
+  overflow: hidden;
+  color: var(--star);
+  white-space: nowrap;
+}
+
+/* Focus ring — terracotta @ 22% */
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(191, 83, 47, 0.22);
+}

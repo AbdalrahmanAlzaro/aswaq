@@ -1,0 +1,38 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_preview.css">
+<title>Components · badges</title>
+<style>
+  .badge { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-body); font-weight: 600; font-size: 12px; padding: 5px 10px; border-radius: 999px; line-height: 1; }
+  .b-verified { background: var(--gold-soft-bg); color: var(--gold-600); }
+  .b-premium  { background: var(--charcoal-600); color: var(--gold-300); padding-right: 12px; }
+  .b-luxury   { background: var(--charcoal-600); color: var(--cream-100); border: 1px solid var(--gold-400); }
+  .b-open     { background: var(--olive-100); color: var(--olive-700); }
+  .b-closed   { background: var(--pom-100); color: var(--pom-700); }
+  .b-new      { background: var(--surface-tint); color: var(--accent-press); border: 1px solid var(--terracotta-200); }
+  .b-discount { background: var(--accent); color: var(--accent-fg); }
+  .b-cat      { background: var(--cream-200); color: var(--charcoal-500); }
+  .dot { width: 6px; height: 6px; border-radius: 999px; background: currentColor; }
+</style>
+</head>
+<body>
+<div class="card tight">
+  <div class="spread"><span class="eyebrow">Badges · status & type</span><span class="mono">.badge.b-*</span></div>
+  <div class="row" style="gap: 8px;">
+    <span class="badge b-verified">
+      <svg width="13" height="13" viewBox="0 0 24 24"><path d="M12 2 L14 4 L17 3.5 L17.5 6.5 L20 8 L19 11 L20 14 L17.5 15.5 L17 18.5 L14 18 L12 20 L10 18 L7 18.5 L6.5 15.5 L4 14 L5 11 L4 8 L6.5 6.5 L7 3.5 L10 4 Z" fill="currentColor"/><path d="M8.5 11 L11 13.5 L15.5 9" stroke="var(--gold-soft-bg)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Owner-verified</span>
+    <span class="badge b-premium">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M3 7 L7 11 L12 5 L17 11 L21 7 L19 18 H5 Z"/></svg>
+      Premium</span>
+    <span class="badge b-luxury">Luxury</span>
+    <span class="badge b-open"><span class="dot"></span>Open now</span>
+    <span class="badge b-closed"><span class="dot"></span>Closed</span>
+    <span class="badge b-new">New on Aswaq</span>
+    <span class="badge b-discount">−20%</span>
+    <span class="badge b-cat">Café</span>
+    <span class="badge b-cat">Jewellery</span>
+    <span class="badge b-cat">Watches</span>
+  </div>
+  <div class="mono" style="font-size: 11px;">Verified = soft gold pill · Premium = ink + gold · Luxury = ink + gold border · Open/Closed = olive/pomegranate</div>
+</div>
+</body></html>

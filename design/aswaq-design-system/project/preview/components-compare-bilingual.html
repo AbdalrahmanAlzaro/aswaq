@@ -1,0 +1,93 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_preview.css">
+<title>Components · compare LTR + RTL</title>
+<style>
+  body { background: var(--cream-100); }
+  .pane { background: var(--surface); border-radius: 16px; padding: 16px; border: 1px solid var(--border); box-shadow: var(--shadow-xs); }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+  .tag { font-family: var(--font-mono); font-size: 10px; color: var(--fg-3); padding: 3px 8px; border-radius: 4px; background: var(--cream-200); display: inline-block; }
+  .h { font-family: var(--font-display); font-weight: 600; font-size: 18px; line-height: 1.15; letter-spacing: -0.01em; color: var(--fg-1); margin: 4px 0 0; }
+  .h.ar { font-family: 'El Messiri', 'IBM Plex Sans Arabic', sans-serif; font-weight: 700; font-size: 20px; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-top: 10px; }
+  .pcard { background: var(--surface); border-radius: 12px; border: 1px solid var(--border); overflow: hidden; }
+  .pcard.win { box-shadow: 0 0 0 2px var(--olive-300); }
+  .pcard .img { aspect-ratio: 1; position: relative; }
+  .pcard.w1 .img { background: linear-gradient(135deg, #d8d2c8, #4a4339); }
+  .pcard.w2 .img { background: linear-gradient(135deg, #c99633, #5e2614); }
+  .pcard.w3 .img { background: linear-gradient(135deg, #f3e3b5, #c99633); }
+  .pcard .meta { padding: 6px 8px 8px; font-family: var(--font-body); }
+  .pcard .vend { font-size: 9.5px; color: var(--fg-3); font-weight: 500; }
+  .pcard .nm { font-size: 11px; font-weight: 600; color: var(--fg-1); line-height: 1.25; margin-top: 2px; height: 2.5em; overflow: hidden; }
+  .pcard .pr { font-size: 12px; font-weight: 700; margin-top: 4px; font-feature-settings: "tnum"; direction: ltr; unicode-bidi: embed; display: inline-block; white-space: nowrap; }
+  .pcard.win .pr { color: var(--olive-700); }
+  .win-pill { position: absolute; top: 5px; insetInlineStart: 5px; padding: 2px 6px; border-radius: 999px; background: var(--olive-500); color: var(--cream-50); font-size: 8.5px; font-weight: 700; font-family: var(--font-body); }
+  [dir="rtl"] .pcard .nm { font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 12px; }
+  [dir="rtl"] .win-pill { font-family: 'IBM Plex Sans Arabic', sans-serif; }
+
+  .tbl { width: 100%; border-collapse: collapse; margin-top: 10px; background: var(--cream-50); border-radius: 10px; overflow: hidden; font-size: 11px; }
+  .tbl td { padding: 6px 8px; border-bottom: 1px solid var(--border); font-family: var(--font-body); }
+  .tbl tr:last-child td { border-bottom: 0; }
+  .tbl .label { font-weight: 600; color: var(--fg-3); font-size: 10px; background: var(--cream-100); width: 80px; }
+  .tbl .val { text-align: center; font-weight: 500; font-feature-settings: "tnum"; direction: ltr; unicode-bidi: embed; }
+  .tbl .val.win { background: var(--olive-100); color: var(--olive-700); font-weight: 700; }
+  [dir="rtl"] .tbl .label { font-family: 'IBM Plex Sans Arabic', sans-serif; }
+</style>
+</head>
+<body>
+<div class="card tight">
+  <div class="spread">
+    <span class="eyebrow">Compare · LTR and RTL</span>
+    <span class="mono">cheapest highlight · mirrors per direction</span>
+  </div>
+  <div class="pair">
+    <!-- LTR -->
+    <div class="pane" dir="ltr">
+      <span class="tag">EN · LTR</span>
+      <div class="h">Compare prices and ratings</div>
+      <div class="cards">
+        <div class="pcard w1">
+          <div class="img"></div>
+          <div class="meta"><div class="vend">Royal Time</div><div class="nm">Seiko Presage Cocktail</div><div class="pr">485 JD</div></div>
+        </div>
+        <div class="pcard w2">
+          <div class="img"></div>
+          <div class="meta"><div class="vend">Royal Time</div><div class="nm">Tissot PRX Powermatic 80</div><div class="pr">612 JD</div></div>
+        </div>
+        <div class="pcard w3 win">
+          <div class="img"><span class="win-pill">Cheapest</span></div>
+          <div class="meta"><div class="vend">Goldsmiths Amman</div><div class="nm">Filigree gold ring, 18k</div><div class="pr">240 JD</div></div>
+        </div>
+      </div>
+      <table class="tbl">
+        <tr><td class="label">Price</td><td class="val">485 JD</td><td class="val">612 JD</td><td class="val win">240 JD</td></tr>
+        <tr><td class="label">Rating</td><td class="val">4.9 ★</td><td class="val">4.9 ★</td><td class="val">4.8 ★</td></tr>
+        <tr><td class="label">Distance</td><td class="val">5.1 km</td><td class="val">5.1 km</td><td class="val">6.0 km</td></tr>
+      </table>
+    </div>
+    <!-- RTL -->
+    <div class="pane" dir="rtl">
+      <span class="tag">AR · RTL</span>
+      <div class="h ar">قارن الأسعار والتقييمات</div>
+      <div class="cards">
+        <div class="pcard w1">
+          <div class="img"></div>
+          <div class="meta"><div class="vend">رويال تايم</div><div class="nm">ساعة سيكو بريساج</div><div class="pr">485 د.أ</div></div>
+        </div>
+        <div class="pcard w2">
+          <div class="img"></div>
+          <div class="meta"><div class="vend">رويال تايم</div><div class="nm">تيسوت PRX باورماتيك</div><div class="pr">612 د.أ</div></div>
+        </div>
+        <div class="pcard w3 win">
+          <div class="img"><span class="win-pill">الأرخص</span></div>
+          <div class="meta"><div class="vend">الصاغة عمّان</div><div class="nm">خاتم فيليجري ذهب 18</div><div class="pr">240 د.أ</div></div>
+        </div>
+      </div>
+      <table class="tbl">
+        <tr><td class="label">السعر</td><td class="val">485 د.أ</td><td class="val">612 د.أ</td><td class="val win">240 د.أ</td></tr>
+        <tr><td class="label">التقييم</td><td class="val">4.9 ★</td><td class="val">4.9 ★</td><td class="val">4.8 ★</td></tr>
+        <tr><td class="label">المسافة</td><td class="val">5.1 km</td><td class="val">5.1 km</td><td class="val">6.0 km</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+</body></html>
