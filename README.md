@@ -5,9 +5,6 @@ Local price comparison, reviews & marketplace (Jordan).
 - **apps/web** — Next.js 16 (App Router, `src/`, TypeScript, Tailwind, Turbopack) → **http://localhost:3000**
 - **apps/api** — NestJS 11 + TypeORM + PostgreSQL (strict TypeScript) → **http://localhost:3001**
 
-The backend mirrors the architecture of the "Safeer Engine v2" AML codebase (BaseEntity,
-BaseRepository, GenericController, JWT auth, pagination DSL, response envelope, exception
-filters) — but built clean, applying every "do the opposite" lesson from that codebase.
 
 ## Requirements
 - Node.js 20.9+ (you have 22 ✓)
@@ -66,7 +63,7 @@ Reviews:
 
 Every successful response is wrapped as `{ "data": …, "message": "success" }`.
 
-## Backend structure (mirrors the AML codebase, cleanly)
+## Backend structure 
     apps/api/src/
       config/app.config.ts            typed env (app / database / jwt)
       data-source.ts                  standalone DataSource for the TypeORM CLI
