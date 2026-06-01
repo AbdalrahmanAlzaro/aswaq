@@ -54,3 +54,9 @@ Desktop.ini
 
 # Vercel
 .vercel
+
+# Local design + reference material — kept on disk, not tracked.
+# Anchored with a leading "/" so apps/web/docs/ stays tracked.
+/design/
+/docs/
+/References/
