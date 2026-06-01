@@ -1,7 +1,10 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { cn } from "@/lib/utils";
 
+/* Verida — Chip / filter selector (pill). Selected = teal brand; a luxury dot
+ * uses the scarce violet. RTL-safe. API unchanged. */
 export function Chip({
   selected,
   luxury,
@@ -19,19 +22,17 @@ export function Chip({
     <button
       type="button"
       onClick={onClick}
-      className={[
-        "inline-flex items-center gap-1.5 h-9 px-4 rounded-full text-[13px] font-semibold whitespace-nowrap",
-        "border transition-colors duration-150 [transition-timing-function:var(--ease-out-aswaq)] cursor-pointer",
+      aria-pressed={selected}
+      className={cn(
+        "inline-flex h-9 cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-full border px-4 text-[13px] font-medium transition-colors",
         selected
-          ? "bg-[var(--accent)] text-[var(--accent-fg)] border-[var(--accent)]"
-          : "bg-white text-[var(--fg-1)] border-[var(--border)] hover:bg-[var(--surface-alt)]",
+          ? "border-primary bg-primary text-primary-foreground"
+          : "border-border bg-background text-foreground hover:bg-muted",
         className,
-      ]
-        .filter(Boolean)
-        .join(" ")}
+      )}
     >
       {luxury && !selected && (
-        <span className="inline-block w-1.5 h-1.5 rounded-full bg-[var(--color-gold-400)]" />
+        <span className="inline-block h-1.5 w-1.5 rounded-full bg-premium" />
       )}
       {children}
     </button>
@@ -47,12 +48,7 @@ export function ChipRow({
 }) {
   return (
     <div
-      className={[
-        "flex gap-2 overflow-x-auto px-5 py-2 [scrollbar-width:none]",
-        className,
-      ]
-        .filter(Boolean)
-        .join(" ")}
+      className={cn("flex gap-2 overflow-x-auto px-5 py-2", className)}
       style={{ scrollbarWidth: "none" }}
     >
       {children}

@@ -220,41 +220,21 @@ export function Icon({
   );
 }
 
-/* Category → glyph + warm tinted gradient (no-photo fallback). */
+/* Category → glyph + image-slot placeholder (no-photo fallback).
+ * Verida v1 uses a single calm #E8F3F0 (primary-tint) slot for every category
+ * until real photography exists (task item 7); the teal glyph reads on top. */
+const IMAGE_SLOT = "linear-gradient(135deg, #E8F3F0 0%, #DCEDE7 100%)";
+
 export const CATEGORY_STYLE: Record<
   string,
   { glyph: IconName; gradient: string; ink: string }
 > = {
-  cafe: {
-    glyph: "cat-cafe",
-    gradient: "linear-gradient(135deg, #fbf1ec 0%, #ecb9a1 100%)",
-    ink: "var(--color-terracotta-700)",
-  },
-  restaurant: {
-    glyph: "cat-restaurant",
-    gradient: "linear-gradient(135deg, #faf3e1 0%, #ebd086 100%)",
-    ink: "var(--color-gold-600)",
-  },
-  gym: {
-    glyph: "cat-gym",
-    gradient: "linear-gradient(135deg, #e6e7c8 0%, #a8ad62 100%)",
-    ink: "var(--color-olive-700)",
-  },
-  electronics: {
-    glyph: "cat-electronics",
-    gradient: "linear-gradient(135deg, #d8d2c8 0%, #4a4339 100%)",
-    ink: "#fdfbf6",
-  },
-  watches: {
-    glyph: "cat-watches",
-    gradient: "linear-gradient(135deg, #f3eada 0%, #756d63 100%)",
-    ink: "var(--color-charcoal-700)",
-  },
-  jewelry: {
-    glyph: "cat-jewelry",
-    gradient: "linear-gradient(135deg, #f3e3b5 0%, #c99633 100%)",
-    ink: "var(--color-charcoal-700)",
-  },
+  cafe: { glyph: "cat-cafe", gradient: IMAGE_SLOT, ink: "var(--color-primary)" },
+  restaurant: { glyph: "cat-restaurant", gradient: IMAGE_SLOT, ink: "var(--color-primary)" },
+  gym: { glyph: "cat-gym", gradient: IMAGE_SLOT, ink: "var(--color-primary)" },
+  electronics: { glyph: "cat-electronics", gradient: IMAGE_SLOT, ink: "var(--color-primary)" },
+  watches: { glyph: "cat-watches", gradient: IMAGE_SLOT, ink: "var(--color-primary)" },
+  jewelry: { glyph: "cat-jewelry", gradient: IMAGE_SLOT, ink: "var(--color-primary)" },
 };
 
 export function categoryStyle(category: string | undefined) {

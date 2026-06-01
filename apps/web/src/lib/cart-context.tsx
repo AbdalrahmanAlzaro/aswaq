@@ -11,7 +11,7 @@ import {
 } from "react";
 import type { CartLine, Product } from "@/lib/api";
 
-const STORAGE_KEY = "aswaq_cart_v1";
+const STORAGE_KEY = "verida_cart_v1";
 
 interface CartState {
   lines: CartLine[];
@@ -37,6 +37,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw) as CartLine[];
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time hydration from localStorage on mount (kept in an effect to avoid an SSR hydration mismatch)
         if (Array.isArray(parsed)) setLines(parsed);
       }
     } catch {

@@ -1,20 +1,36 @@
 import type { ReactNode } from "react";
+import { cn } from "@/lib/utils";
 
-type Kind = "verified" | "open" | "closed" | "luxury" | "premium" | "neutral";
+/* Verida — Badge
+ * Pill status markers on the Verida palette. Scarcity rules (BRAND.md):
+ *  - verified  → teal-green family + check (the trust pillar)
+ *  - premium / luxury → violet (the ONE scarce premium signal; badge + Upgrade only)
+ *  - success (cheapest/in-stock) → green, kept distinct from the teal brand
+ *  - danger / warning → semantic tints
+ * Presentational: callers pass the glyph + label as children. API unchanged
+ * (kind/children/className); `success`/`danger`/`warning` added to the set.
+ */
+type Kind =
+  | "verified"
+  | "open"
+  | "closed"
+  | "luxury"
+  | "premium"
+  | "neutral"
+  | "success"
+  | "danger"
+  | "warning";
 
 const STYLES: Record<Kind, string> = {
-  verified:
-    "bg-[var(--color-gold-50)] text-[var(--color-gold-600)] border border-[var(--color-gold-200)]",
-  open:
-    "bg-[var(--color-olive-100)] text-[var(--color-olive-700)] border border-[var(--color-olive-300)]/40",
-  closed:
-    "bg-[var(--color-pom-100)] text-[var(--color-pom-700)] border border-[var(--color-pom-300)]/40",
-  luxury:
-    "bg-[var(--color-charcoal-600)] text-[var(--color-gold-300)] border border-[var(--color-charcoal-500)]",
-  premium:
-    "bg-[var(--color-gold-50)] text-[var(--color-gold-600)] border border-[var(--color-gold-200)] uppercase tracking-[0.14em]",
-  neutral:
-    "bg-[var(--surface-alt)] text-[var(--fg-2)] border border-[var(--border)]",
+  verified: "bg-primary-tint text-primary border border-primary/20",
+  premium: "bg-premium-tint text-premium-ink border border-premium/20 uppercase tracking-[0.08em]",
+  luxury: "bg-premium-tint text-premium-ink border border-premium/20",
+  success: "bg-success-tint text-success-ink border border-success/20",
+  open: "bg-success-tint text-success-ink border border-success/20",
+  danger: "bg-destructive-tint text-destructive border border-destructive/20",
+  closed: "bg-destructive-tint text-destructive border border-destructive/20",
+  warning: "bg-warning-tint text-warning border border-warning/20",
+  neutral: "bg-muted text-muted-foreground border border-border",
 };
 
 export function Badge({
@@ -28,13 +44,11 @@ export function Badge({
 }) {
   return (
     <span
-      className={[
-        "inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold leading-none",
+      className={cn(
+        "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold leading-none [&_svg]:size-3",
         STYLES[kind],
         className,
-      ]
-        .filter(Boolean)
-        .join(" ")}
+      )}
     >
       {children}
     </span>

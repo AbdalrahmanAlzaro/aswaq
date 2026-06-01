@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { apiFetch, type RequestOptions } from "./api";
 
-const TOKEN_COOKIE = "aswaq_token";
+const TOKEN_COOKIE = "verida_token";
 
 export async function getServerToken(): Promise<string | undefined> {
   const store = await cookies();

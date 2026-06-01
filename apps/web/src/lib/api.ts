@@ -1,8 +1,8 @@
 /**
- * Aswaq API client.
+ * Verida API client.
  *
  * Hits NEXT_PUBLIC_API_URL (which already includes /api/v1), unwraps the
- * `{ data, message }` envelope, attaches the JWT from the `aswaq_token`
+ * `{ data, message }` envelope, attaches the JWT from the `verida_token`
  * cookie (client) or the incoming request cookies (server), and surfaces
  * the 402 luxury-compare paywall as a typed `PaywallRequiredError`.
  *
@@ -55,7 +55,7 @@ export type RequestOptions = Omit<RequestInit, "body"> & {
   query?: Record<string, string | number | boolean | undefined | null>;
 };
 
-const TOKEN_COOKIE = "aswaq_token";
+const TOKEN_COOKIE = "verida_token";
 
 function getBaseUrl(): string {
   const url = process.env.NEXT_PUBLIC_API_URL;
@@ -309,11 +309,13 @@ export interface ApiFavorite {
   business?: ApiBusiness;
 }
 
+export type UserRole = "shopper" | "business" | "admin";
+
 export interface ApiMe {
   id: string;
   email: string;
   name: string;
-  role: "shopper" | "business" | "admin";
+  role: UserRole;
   isPremium: boolean;
 }
 
@@ -457,10 +459,17 @@ export const Api = {
       method: "POST",
       body: { email, password },
     }),
-  register: (name: string, email: string, password: string) =>
+  // `role` is optional; the API defaults to "shopper". The register screen
+  // sends "shopper" or "business" via the Shopper / Seller intent toggle.
+  register: (
+    name: string,
+    email: string,
+    password: string,
+    role?: UserRole,
+  ) =>
     apiFetch<{ accessToken: string; user: ApiMe }>("/auth/register", {
       method: "POST",
-      body: { name, email, password },
+      body: { name, email, password, ...(role ? { role } : {}) },
     }),
   me: (token?: string) => apiFetch<ApiMe>("/auth/me", { token }),
 

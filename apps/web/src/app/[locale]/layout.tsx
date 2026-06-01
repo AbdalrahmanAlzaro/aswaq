@@ -3,20 +3,16 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import {
-  fontDisplay,
-  fontBody,
-  fontArabicDisplay,
-  fontArabic,
-} from "@/app/fonts";
+import { readex } from "@/app/fonts";
 import { Header } from "@/components/header";
 import { BottomNav } from "@/components/bottom-nav";
 import { CartProvider } from "@/lib/cart-context";
 import "../globals.css";
 
 export const metadata: Metadata = {
-  title: "Aswaq",
-  description: "Local price comparison, reviews & marketplace — Jordan",
+  title: "Verida",
+  description:
+    "Verida — local price comparison, reviews & marketplace for Jordan.",
 };
 
 export function generateStaticParams() {
@@ -36,24 +32,20 @@ export default async function LocaleLayout({
   }
   setRequestLocale(locale);
 
-  const fontClasses = [
-    fontDisplay.variable,
-    fontBody.variable,
-    fontArabicDisplay.variable,
-    fontArabic.variable,
-  ].join(" ");
-
   return (
     <html
       lang={locale}
       dir={locale === "ar" ? "rtl" : "ltr"}
-      className={`${fontClasses} h-full antialiased`}
+      className={`${readex.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[var(--bg)] text-[var(--fg-1)]">
+      <body className="flex min-h-full flex-col bg-background text-foreground">
         <NextIntlClientProvider>
           <CartProvider>
-            <Header locale={locale as "en" | "ar"} />
-            <main className="flex-1 pb-20 md:pb-12">{children}</main>
+            <Header />
+            {/* pb-16 leaves room for the mobile BottomNav; cleared at lg where it hides */}
+            <main id="main" className="flex-1 pb-16 lg:pb-0">
+              {children}
+            </main>
             <BottomNav />
           </CartProvider>
         </NextIntlClientProvider>

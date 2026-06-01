@@ -54,6 +54,7 @@ export function BusinessForm({
   // Refresh the dependent area list when the city changes.
   useEffect(() => {
     if (!cityId) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- reset dependent area list/selection when the parent city is cleared
       setAreas([]);
       setAreaId("");
       return;

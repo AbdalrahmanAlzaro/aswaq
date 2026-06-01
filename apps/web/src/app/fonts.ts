@@ -1,41 +1,26 @@
-import {
-  Fraunces,
-  Plus_Jakarta_Sans,
-  El_Messiri,
-  IBM_Plex_Sans_Arabic,
-} from "next/font/google";
+import { Readex_Pro } from "next/font/google";
 
-export const fontDisplay = Fraunces({
-  subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
-  variable: "--font-display",
+/**
+ * Verida type system — Readex Pro.
+ *
+ * One variable family covering BOTH Arabic and Latin (BRAND.md, Decision #4),
+ * chosen for clear bilingual reading that serves the Arabic-first requirement
+ * and the "clarity / truth" brand from a single harmonious type system.
+ *
+ * `next/font/google` self-hosts the font at build time (the .woff2 files are
+ * emitted into the build output), so there is NO runtime request to Google —
+ * this covers the offline / self-hosted concern with no CDN dependency.
+ *
+ * Readex Pro is a variable font, so we omit `weight` and load the full axis
+ * range (the design uses 600 headlines / 500 labels-buttons / 400 body / 300
+ * quiet display). The family is exposed as the CSS variable `--font-readex`,
+ * which `--font-sans` in globals.css points at.
+ */
+export const readex = Readex_Pro({
+  subsets: ["latin", "arabic"],
+  variable: "--font-readex",
   display: "swap",
 });
 
-export const fontBody = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-body",
-  display: "swap",
-});
-
-export const fontArabicDisplay = El_Messiri({
-  subsets: ["arabic"],
-  weight: ["500", "600", "700"],
-  variable: "--font-arabic-display",
-  display: "swap",
-});
-
-export const fontArabic = IBM_Plex_Sans_Arabic({
-  subsets: ["arabic"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-arabic",
-  display: "swap",
-});
-
-export const fontVariables = [
-  fontDisplay.variable,
-  fontBody.variable,
-  fontArabicDisplay.variable,
-  fontArabic.variable,
-].join(" ");
+/** Convenience: the class that exposes `--font-readex` on <html>. */
+export const fontVariables = readex.variable;

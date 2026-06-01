@@ -1,53 +1,43 @@
 "use client";
 
-import { usePathname, useRouter } from "@/i18n/navigation";
-import { useParams } from "next/navigation";
-import { useTransition } from "react";
+/* Verida — language switch (Arabic <-> English)
+ * Swaps the [locale] segment in the current path; next-intl applies dir/lang on navigation.
+ * Uses next/navigation so it works regardless of the project's next-intl router wrapper.
+ * (If you use next-intl's localized router, you can swap usePathname/useRouter for its versions.)
+ * Path: apps/web/src/components/layout/language-switch.tsx
+ */
 
-export function LanguageSwitcher() {
-  const router = useRouter();
+import { useLocale } from "next-intl";
+import { usePathname, useRouter } from "next/navigation";
+import { Languages } from "lucide-react";
+
+export function LanguageSwitch() {
+  const locale = useLocale();
   const pathname = usePathname();
-  const params = useParams();
-  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
-  const current = (params.locale as "en" | "ar") ?? "en";
+  const next = locale === "ar" ? "en" : "ar";
+  const label = locale === "ar" ? "English" : "العربية";
 
-  function setLocale(locale: "en" | "ar") {
-    if (locale === current) return;
-    startTransition(() => {
-      router.replace(
-        // pathname is locale-agnostic via createNavigation
-        pathname,
-        { locale },
-      );
-    });
-  }
+  const switchLocale = () => {
+    const segments = pathname.split("/");
+    if (segments[1] === "ar" || segments[1] === "en") {
+      segments[1] = next;
+    } else {
+      segments.splice(1, 0, next);
+    }
+    router.push(segments.join("/") || `/${next}`);
+  };
 
   return (
-    <div
-      className="inline-flex items-center bg-[var(--surface-alt)] rounded-full p-0.5 text-[12px] font-semibold"
-      data-pending={isPending ? "true" : undefined}
+    <button
+      type="button"
+      onClick={switchLocale}
+      aria-label={`Switch language to ${label}`}
+      className="inline-flex items-center gap-1.5 rounded-md px-2.5 py-2 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground"
     >
-      <button
-        type="button"
-        className={[
-          "px-2.5 py-1 rounded-full cursor-pointer",
-          current === "en" ? "bg-white text-[var(--fg-1)] shadow-sm" : "text-[var(--fg-2)]",
-        ].join(" ")}
-        onClick={() => setLocale("en")}
-      >
-        EN
-      </button>
-      <button
-        type="button"
-        className={[
-          "px-2.5 py-1 rounded-full cursor-pointer",
-          current === "ar" ? "bg-white text-[var(--fg-1)] shadow-sm" : "text-[var(--fg-2)]",
-        ].join(" ")}
-        onClick={() => setLocale("ar")}
-      >
-        ع
-      </button>
-    </div>
+      <Languages className="size-4" aria-hidden="true" />
+      <span>{label}</span>
+    </button>
   );
 }

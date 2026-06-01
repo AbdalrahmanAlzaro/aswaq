@@ -1,7 +1,9 @@
 import { formatRating } from "@/lib/format";
 
-/**
- * StarRating — numeric label + clipped 5-star track. No half-stars by design.
+/* Verida — StarRating
+ * Numeric label + a gold fill clipped to the exact rating % over a gray track.
+ * No half-stars by design. Accessible via role="img" + aria-label.
+ * Colours come from `.stars-track` / `.stars-fill` (see globals.css). API unchanged.
  */
 export function StarRating({
   rating,
@@ -14,14 +16,18 @@ export function StarRating({
   showNumber?: boolean;
   count?: number;
 }) {
-  const pct = (Math.max(0, Math.min(5, rating)) / 5) * 100;
+  const clamped = Math.max(0, Math.min(5, rating));
+  const pct = (clamped / 5) * 100;
   const stars = "★★★★★";
   return (
-    <span className="inline-flex items-center gap-1.5" style={{ fontSize: size }}>
+    <span
+      className="inline-flex items-center gap-1.5"
+      style={{ fontSize: size }}
+      role="img"
+      aria-label={`${formatRating(rating)} out of 5`}
+    >
       {showNumber && (
-        <b className="num font-bold text-[var(--fg-1)]">
-          {formatRating(rating)}
-        </b>
+        <b className="num font-bold text-foreground">{formatRating(rating)}</b>
       )}
       <span className="stars-track" aria-hidden="true">
         {stars}
@@ -30,9 +36,7 @@ export function StarRating({
         </span>
       </span>
       {count != null && (
-        <span className="num text-[var(--fg-3)] text-[11px]">
-          ({count})
-        </span>
+        <span className="num text-[11px] text-subtle-foreground">({count})</span>
       )}
     </span>
   );

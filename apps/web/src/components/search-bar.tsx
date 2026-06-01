@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { Icon } from "./ui/icon";
 
+/* Verida — SearchBar. Re-skinned to Verida tokens; RTL-safe (logical box, the
+ * search/filter glyphs are non-directional). API unchanged. */
 export function SearchBar({
   placeholder,
   basePath = "/search",
@@ -20,19 +22,21 @@ export function SearchBar({
         e.preventDefault();
         router.push(q ? `${basePath}?q=${encodeURIComponent(q)}` : basePath);
       }}
-      className="flex items-center gap-2 h-12 bg-white rounded-[var(--radius-md)] border border-[var(--border-strong)] px-3 mx-5"
+      role="search"
+      className="mx-5 flex h-12 items-center gap-2 rounded-xl border border-input bg-background px-3"
     >
-      <Icon name="search" size={18} className="text-[var(--fg-2)]" />
+      <Icon name="search" size={18} className="text-muted-foreground" />
       <input
         value={q}
         onChange={(e) => setQ(e.target.value)}
         placeholder={placeholder}
-        className="flex-1 bg-transparent outline-none text-[15px] text-[var(--fg-1)] placeholder:text-[var(--fg-mute)]"
+        aria-label={placeholder}
+        className="flex-1 bg-transparent text-[15px] text-foreground outline-none placeholder:text-subtle-foreground"
       />
       <button
         type="button"
         aria-label="Filter"
-        className="grid place-items-center w-8 h-8 text-[var(--fg-2)] hover:text-[var(--fg-1)] cursor-pointer"
+        className="grid h-8 w-8 cursor-pointer place-items-center text-muted-foreground hover:text-foreground"
       >
         <Icon name="filter" size={18} />
       </button>

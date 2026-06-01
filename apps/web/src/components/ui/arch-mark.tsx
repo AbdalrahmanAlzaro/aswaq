@@ -5,7 +5,7 @@
  */
 export function ArchMark({
   size = 28,
-  color = "var(--color-gold-400)",
+  color = "var(--color-primary)",
   className,
   style,
 }: {

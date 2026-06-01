@@ -1,208 +1,268 @@
+/* Verida — design-system foundation
+ * Tailwind v4 (CSS-first config). Tokens implement docs/brand/BRAND.md (Decision #4).
+ * Light / white-based only for v1. Arabic-first / RTL is the default (next-intl sets
+ * dir="rtl" + lang on <html>); build direction-agnostic with logical properties.
+ *
+ * Token-name mapping (v4-ergonomic name  ->  BRAND.md role):
+ *   --color-background      -> Surface (#FFFFFF)
+ *   --color-muted           -> Surface 2 (#F5F7F8)
+ *   --color-foreground      -> Ink / text (#111827)
+ *   --color-muted-foreground-> Text secondary (#5B6472)
+ *   --color-border / -input -> Border (#E6E9EC)
+ *   --color-primary*        -> Brand teal-green (verified clarity)
+ *   --color-premium*        -> Premium / luxury (scarce: badge + Upgrade only)
+ *   --color-success*        -> Success / "cheapest" / in-stock (kept distinct from teal)
+ */
+
 @import "tailwindcss";
 
-/* =========================================================================
-   Aswaq Design System — Foundations (Tailwind v4 @theme)
-   ========================================================================= */
-
 @theme {
-  /* Color — Terracotta (primary) */
-  --color-terracotta-50: #fbf1ec;
-  --color-terracotta-100: #f5dccf;
-  --color-terracotta-200: #ecb9a1;
-  --color-terracotta-300: #df9072;
-  --color-terracotta-400: #d06b4b;
-  --color-terracotta-500: #bf532f;
-  --color-terracotta-600: #a64223;
-  --color-terracotta-700: #82331b;
-  --color-terracotta-800: #5e2614;
-  --color-terracotta-900: #3b170c;
+  /* Typography — Readex Pro is wired via next/font/google in [locale]/layout.tsx
+     (subsets ["latin","arabic"], self-hosted at build). `--font-readex` carries it;
+     the fallbacks cover Arabic + Latin if the font is slow to load. */
+  --font-sans:
+    var(--font-readex), ui-sans-serif, system-ui, "Segoe UI", "Noto Sans Arabic",
+    "Noto Kufi Arabic", Tahoma, sans-serif;
+  /* All historical font roles collapse onto the single Readex family so legacy
+     `font-display` / `font-body` utilities keep resolving (one harmonious system). */
+  --font-display: var(--font-sans);
+  --font-body: var(--font-sans);
+  --font-arabic: var(--font-sans);
+  --font-arabic-display: var(--font-sans);
 
-  /* Color — Cream (neutral warm) */
-  --color-cream-50: #fdfbf6;
-  --color-cream-100: #faf5ea;
-  --color-cream-200: #f3eada;
-  --color-cream-300: #e8dcc5;
-  --color-cream-400: #d2c0a1;
-  --color-cream-500: #b69e78;
+  --radius: 0.75rem;
 
-  /* Color — Gold (status) */
-  --color-gold-50: #faf3e1;
-  --color-gold-100: #f3e3b5;
-  --color-gold-200: #ebd086;
-  --color-gold-300: #dcb24f;
-  --color-gold-400: #c99633;
-  --color-gold-500: #ad7c22;
-  --color-gold-600: #8a611b;
+  /* Neutral / surface */
+  --color-background: #ffffff;
+  --color-foreground: #111827;
+  --color-card: #ffffff;
+  --color-card-foreground: #111827;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #111827;
+  --color-muted: #f5f7f8;
+  --color-muted-foreground: #5b6472;
+  --color-subtle-foreground: #98a1ad;
+  --color-accent: #f5f7f8;
+  --color-accent-foreground: #111827;
+  --color-secondary: #f1f3f5;
+  --color-secondary-foreground: #111827;
+  --color-border: #e6e9ec;
+  --color-input: #e6e9ec;
+  --color-ring: #0e7a66;
 
-  /* Color — Charcoal (ink) */
-  --color-charcoal-50: #f4f1ec;
-  --color-charcoal-100: #d8d2c8;
-  --color-charcoal-200: #a8a097;
-  --color-charcoal-300: #756d63;
-  --color-charcoal-400: #4a4339;
-  --color-charcoal-500: #2b251f;
-  --color-charcoal-600: #1f1a15;
-  --color-charcoal-700: #14110d;
+  /* Brand / primary (teal-green) */
+  --color-primary: #0e7a66;
+  --color-primary-hover: #0b6151;
+  --color-primary-foreground: #ffffff;
+  --color-primary-tint: #e8f3f0;
 
-  /* Color — Olive (success) */
-  --color-olive-100: #e6e7c8;
-  --color-olive-300: #a8ad62;
-  --color-olive-500: #6e7331;
-  --color-olive-700: #444723;
+  /* Premium / luxury accent (violet) — scarce: Premium/luxury badge + Upgrade CTA only */
+  --color-premium: #7c3aed;
+  --color-premium-foreground: #ffffff;
+  --color-premium-tint: #f1ecfe;
+  --color-premium-ink: #5b21b6;
 
-  /* Color — Pomegranate (danger) */
-  --color-pom-100: #f7d8d3;
-  --color-pom-300: #d97268;
-  --color-pom-500: #b2342a;
-  --color-pom-700: #7a1f17;
+  /* Success / cheapest / in-stock (kept distinct from the teal brand) */
+  --color-success: #16a34a;
+  --color-success-foreground: #ffffff;
+  --color-success-tint: #e9f7ef;
+  --color-success-ink: #15803d;
 
-  /* Radii */
-  --radius-xs: 6px;
-  --radius-sm: 10px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
-  --radius-2xl: 36px;
+  /* Danger / out-of-stock / destructive */
+  --color-destructive: #dc2626;
+  --color-destructive-foreground: #ffffff;
+  --color-destructive-tint: #fceded;
 
-  /* Shadows (charcoal-tinted, never grey) */
-  --shadow-xs: 0 1px 2px rgba(31, 26, 21, 0.06);
-  --shadow-sm: 0 2px 6px rgba(31, 26, 21, 0.06), 0 1px 2px rgba(31, 26, 21, 0.04);
-  --shadow-md: 0 8px 20px -8px rgba(31, 26, 21, 0.14), 0 2px 6px rgba(31, 26, 21, 0.05);
-  --shadow-lg: 0 18px 40px -16px rgba(31, 26, 21, 0.22), 0 4px 12px rgba(31, 26, 21, 0.06);
-  --shadow-xl: 0 32px 60px -20px rgba(31, 26, 21, 0.30), 0 8px 20px rgba(31, 26, 21, 0.08);
+  /* Warning / below-minimum nudge */
+  --color-warning: #d97706;
+  --color-warning-foreground: #ffffff;
+  --color-warning-tint: #fdf3e7;
 
-  /* Easing & timing */
-  --ease-out-aswaq: cubic-bezier(0.22, 0.61, 0.36, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* Info */
+  --color-info: #2563eb;
+  --color-info-foreground: #ffffff;
+  --color-info-tint: #e8f0fe;
+
+  /* Rating stars — warm gold, distinct from teal brand + green success */
+  --color-star: #e0a93b;
 }
 
-/* Semantic tokens + font-family wiring (next/font sets the CSS variables) */
-:root {
-  --bg: var(--color-cream-50);
-  --bg-raised: var(--color-cream-100);
-  --bg-sunken: var(--color-cream-200);
-  --surface: #ffffff;
-  --surface-alt: var(--color-cream-100);
-  --surface-tint: var(--color-terracotta-50);
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-border);
+  }
 
-  --fg-1: var(--color-charcoal-600);
-  --fg-2: var(--color-charcoal-400);
-  --fg-3: var(--color-charcoal-300);
-  --fg-mute: var(--color-charcoal-200);
-  --fg-inverse: var(--color-cream-50);
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
 
-  --border: var(--color-cream-300);
-  --border-strong: var(--color-cream-400);
-  --border-focus: var(--color-terracotta-500);
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
 
-  --accent: var(--color-terracotta-500);
-  --accent-hover: var(--color-terracotta-600);
-  --accent-press: var(--color-terracotta-700);
-  --accent-fg: #ffffff;
-
-  --gold: var(--color-gold-400);
-  --gold-soft-bg: var(--color-gold-50);
-
-  --success: var(--color-olive-500);
-  --success-soft-bg: var(--color-olive-100);
-
-  --danger: var(--color-pom-500);
-  --danger-soft-bg: var(--color-pom-100);
-
-  --star: var(--color-gold-400);
-
-  /* Font stacks (next/font supplies --font-display, --font-body, etc.) */
-  --font-stack-display: var(--font-display), "Cormorant Garamond", "Times New Roman", serif;
-  --font-stack-body: var(--font-body), -apple-system, "Segoe UI", system-ui, sans-serif;
-  --font-stack-arabic: var(--font-arabic), "Tajawal", "Segoe UI Arabic", sans-serif;
-  --font-stack-arabic-display: var(--font-arabic-display), "Amiri", var(--font-arabic), sans-serif;
+  /* Visible, on-brand focus ring everywhere keyboard users land */
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+  }
 }
 
-html,
-body {
-  background: var(--bg);
-  color: var(--fg-1);
-  font-family: var(--font-stack-body);
-  font-size: 16px;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+@layer utilities {
+  /* Tabular, lining figures so prices line up in comparison tables */
+  .nums-tabular,
+  .num {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  /* Price isolation: a monetary value never reorders under RTL, and digits align.
+     (BRAND.md: "Price isolation — monetary values never reorder under RTL.") */
+  .price {
+    direction: ltr;
+    unicode-bidi: isolate;
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  /* StarRating: a gray 5-star track with a gold fill clipped to the rating %.
+     No half-stars — the fill width is exact. */
+  .stars-track {
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+    color: var(--color-border);
+    letter-spacing: 0.08em;
+  }
+  .stars-fill {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    color: var(--color-star);
+    letter-spacing: 0.08em;
+  }
 }
 
-[lang="ar"],
-[dir="rtl"] {
-  font-family: var(--font-stack-arabic);
-}
-
-/* Tabular Latin digits, even inside Arabic — prices stay 0–9 */
-.num {
-  font-family: var(--font-stack-body);
-  font-feature-settings: "tnum", "lnum";
-}
-
-/* Price helper: Latin digits + currency, isolated bidi run so "12 JD"
-   never reorders to "JD 12" when embedded in Arabic text. */
-.price {
-  font-family: var(--font-stack-body);
-  font-feature-settings: "tnum", "lnum";
-  font-weight: 700;
-  unicode-bidi: isolate;
-  direction: ltr;
-  white-space: nowrap;
-}
-[dir="rtl"] .price {
-  unicode-bidi: isolate;
-}
-
-/* Display-headings — Latin + Arabic counterpart */
-.font-display {
-  font-family: var(--font-stack-display);
-}
-[lang="ar"] .font-display,
-[dir="rtl"] .font-display {
-  font-family: var(--font-stack-arabic-display);
-  letter-spacing: 0;
-}
-
-/* Directional icons: mirror under RTL */
-.flip-rtl {
-  transition: transform 0s;
-}
+/* Marker class: add .flip-rtl to directional icons/chevrons that must mirror in RTL */
 [dir="rtl"] .flip-rtl {
   transform: scaleX(-1);
 }
 
-/* Eyebrow — uppercase Latin / standard-case Arabic, +0.14em tracking */
-.eyebrow {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--fg-2);
-}
-[lang="ar"] .eyebrow,
-[dir="rtl"] .eyebrow {
-  text-transform: none;
-  letter-spacing: 0;
+/* Calm skeleton pulse (BRAND principle: no marketing-shimmer; 0.6 -> 1.0 opacity).
+   Components prefer framer-motion, but this is the reduced-motion-safe CSS fallback. */
+@keyframes verida-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
 }
 
-/* Star track for ratings */
-.stars-track {
-  position: relative;
-  display: inline-block;
-  color: var(--color-cream-300);
-}
-.stars-fill {
-  position: absolute;
-  inset-inline-start: 0;
-  top: 0;
-  overflow: hidden;
-  color: var(--star);
-  white-space: nowrap;
-}
+/* =========================================================================
+   LEGACY COMPAT LAYER — TEMPORARY
+   The "warm souq" placeholder system (terracotta/cream/gold + Fraunces/Plex)
+   was discarded entirely by BRAND.md Decision #4. Phase 0 PRIMITIVES were
+   re-skinned to the Verida tokens above and do NOT depend on anything here.
+   These aliases only keep the not-yet-redesigned Phase 1–5 screens (home,
+   account, cart, business, product, checkout…) rendering ON the Verida palette
+   until each is rebuilt in its phase. Delete an alias once its screen is reskinned.
+   ========================================================================= */
+:root {
+  /* semantic */
+  --bg: var(--color-background);
+  --bg-raised: var(--color-muted);
+  --bg-sunken: var(--color-muted);
+  --bg-inverse: var(--color-foreground);
+  --surface: var(--color-background);
+  --surface-alt: var(--color-muted);
+  --surface-tint: var(--color-primary-tint);
+  --fg-1: var(--color-foreground);
+  --fg-2: var(--color-muted-foreground);
+  --fg-3: var(--color-subtle-foreground);
+  --fg-mute: var(--color-subtle-foreground);
+  --fg-inverse: #ffffff;
+  --accent: var(--color-primary);
+  --accent-hover: var(--color-primary-hover);
+  --accent-press: var(--color-primary-hover);
+  --accent-fg: var(--color-primary-foreground);
+  --border: var(--color-border);
+  --border-strong: var(--color-border);
+  --border-focus: var(--color-primary);
+  --danger: var(--color-destructive);
+  --danger-soft-bg: var(--color-destructive-tint);
+  --success: var(--color-success);
+  --success-soft-bg: var(--color-success-tint);
+  --gold: var(--color-star);
+  --gold-soft-bg: var(--color-premium-tint);
+  --star: var(--color-star);
 
-/* Focus ring — terracotta @ 22% */
-:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 4px rgba(191, 83, 47, 0.22);
+  /* radii */
+  --radius-xs: 0.375rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-pill: 999px;
+
+  /* shadows (charcoal-tinted, low opacity) */
+  --shadow-xs: 0 1px 2px rgba(17, 24, 39, 0.06);
+  --shadow-sm: 0 2px 6px rgba(17, 24, 39, 0.06), 0 1px 2px rgba(17, 24, 39, 0.04);
+  --shadow-md: 0 8px 20px -8px rgba(17, 24, 39, 0.14), 0 2px 6px rgba(17, 24, 39, 0.05);
+  --shadow-lg: 0 18px 40px -16px rgba(17, 24, 39, 0.18), 0 4px 12px rgba(17, 24, 39, 0.06);
+  --shadow-xl: 0 32px 60px -20px rgba(17, 24, 39, 0.24), 0 8px 20px rgba(17, 24, 39, 0.08);
+  --shadow-focus: 0 0 0 4px rgba(14, 122, 102, 0.22);
+
+  /* motion */
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out-aswaq: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --t-fast: 140ms;
+  --t-base: 220ms;
+  --t-slow: 360ms;
+
+  /* legacy font-stack aliases */
+  --font-stack-display: var(--font-sans);
+  --font-stack-arabic-display: var(--font-sans);
+
+  /* legacy palette scales remapped onto Verida roles
+     terracotta (old accent) -> primary teal */
+  --color-terracotta-50: var(--color-primary-tint);
+  --color-terracotta-200: #9fcfc4;
+  --color-terracotta-700: var(--color-primary-hover);
+  /* cream (old neutral warm) -> white / surface-2 / border */
+  --color-cream-50: #ffffff;
+  --color-cream-100: var(--color-muted);
+  --color-cream-200: var(--color-muted);
+  --color-cream-300: var(--color-border);
+  --color-cream-400: #d3d8de;
+  /* gold (old status) -> warm gold + premium tint */
+  --color-gold-50: var(--color-warning-tint);
+  --color-gold-100: #f6e6c8;
+  --color-gold-200: #ecd29a;
+  --color-gold-300: var(--color-star);
+  --color-gold-400: var(--color-star);
+  --color-gold-500: var(--color-warning);
+  --color-gold-600: #a86a16;
+  /* charcoal (old ink) -> ink ramp */
+  --color-charcoal-500: #2b303a;
+  --color-charcoal-600: var(--color-foreground);
+  --color-charcoal-700: #0b0f17;
+  /* olive (old success) -> success ramp */
+  --color-olive-100: var(--color-success-tint);
+  --color-olive-300: #86d6a4;
+  --color-olive-500: var(--color-success);
+  --color-olive-700: var(--color-success-ink);
+  /* pomegranate (old danger) -> danger ramp */
+  --color-pom-100: var(--color-destructive-tint);
+  --color-pom-300: #ef9a9a;
+  --color-pom-500: var(--color-destructive);
+  --color-pom-700: #991b1b;
 }

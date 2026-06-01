@@ -47,6 +47,7 @@ export function CityAreaPicker({
   useEffect(() => {
     let cancelled = false;
     if (!selectedCityId) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- reset dependent area list when no city is selected
       setAreas([]);
       return;
     }
